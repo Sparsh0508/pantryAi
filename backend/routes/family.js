@@ -51,8 +51,10 @@ router.get('/verify/:token', async (req, res) => {
         inviter.familyMembers[memberIndex].inviteToken = undefined;
         await inviter.save();
 
-        // Redirect to frontend (dashboard)
-        res.redirect('http://localhost:5173/login?verified=true');
+        // Redirect to frontend (dashboard). Use FRONTEND_URL from env in production,
+        // fallback to localhost during development.
+        const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
+        res.redirect(`${frontendUrl.replace(/\/$/, '')}/login?verified=true`);
 
     } catch (error) {
         console.error('Verify invite error:', error);
@@ -95,7 +97,9 @@ router.post('/invite', [auth, [
         await user.save();
 
         // Send Email
-        const inviteLink = `https://pantry-ai-alpha.vercel.app//api/family/verify/${inviteToken}`;
+        // Build invite link using FRONTEND_URL or fallback to current host when available
+        const apiBase = process.env.API_URL || 'https://pantry-ai-alpha.vercel.app';
+        const inviteLink = `${apiBase.replace(/\/$/, '')}/api/family/verify/${inviteToken}`;
         // Dynamic import to avoid circular dep if any, or just import top level. Clean import is better.
         // Assuming emailService is available.
         const { sendInviteEmail } = await import('../services/emailService.js');
