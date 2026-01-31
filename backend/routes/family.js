@@ -95,7 +95,7 @@ router.post('/invite', [auth, [
         await user.save();
 
         // Send Email
-        const inviteLink = `http://localhost:3000/api/family/verify/${inviteToken}`;
+        const inviteLink = `https://pantry-ai-alpha.vercel.app//api/family/verify/${inviteToken}`;
         // Dynamic import to avoid circular dep if any, or just import top level. Clean import is better.
         // Assuming emailService is available.
         const { sendInviteEmail } = await import('../services/emailService.js');
