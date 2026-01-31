@@ -1,0 +1,146 @@
+/* Pantry Page */
+
+.pantry-page {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.pantry-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.pantry-stats .stat-card {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1.5rem;
+}
+
+.stat-icon {
+    width: 48px;
+    height: 48px;
+}
+
+.pantry-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.pantry-card {
+    padding: 1.5rem;
+    position: relative;
+    transition: all var(--transition-base);
+}
+
+.pantry-card:hover {
+    transform: translateY(-4px);
+}
+
+.pantry-card.status-expired {
+    border: 2px solid var(--color-error);
+    animation: shake 0.5s ease-in-out;
+}
+
+.pantry-card.status-critical {
+    border: 2px solid var(--color-warning);
+}
+
+.pantry-card.status-low {
+    border: 2px solid var(--color-accent);
+}
+
+.pantry-card.status-good {
+    border: 2px solid var(--color-success);
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px);
+    }
+
+    75% {
+        transform: translateX(5px);
+    }
+}
+
+.pantry-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.pantry-icon {
+    font-size: 3rem;
+}
+
+.status-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.status-indicator.status-good {
+    background: var(--color-success);
+}
+
+.status-indicator.status-low {
+    background: var(--color-warning);
+}
+
+.status-indicator.status-critical {
+    background: var(--color-error);
+}
+
+.status-indicator.status-expired {
+    background: var(--color-error);
+}
+
+.pantry-card-body h4 {
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+}
+
+.pantry-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.875rem;
+}
+
+.info-label {
+    color: var(--color-text-secondary);
+    font-weight: 500;
+}
+
+.info-value {
+    color: var(--color-text);
+    font-weight: 600;
+}
+
+.text-error {
+    color: var(--color-error);
+}
+
+@media (max-width: 768px) {
+    .pantry-grid {
+        grid-template-columns: 1fr;
+    }
+}
